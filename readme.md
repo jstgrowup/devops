@@ -1,4 +1,4 @@
-what is devops
+# what is devops
 
 - Requirement
   - Gathering & analysis
@@ -78,7 +78,7 @@ there are different models in SDLC its like path to reach the same destination
 
 # create virtual machines
 
--
+- 
 
 # concepts
 
