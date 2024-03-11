@@ -83,7 +83,35 @@ difference is the packaging system in these both
      - `{output 1}>{target file path}` here its a single > so its gonna replace everythign that is already present in that file with the new output example : `date>/tmp/sysinfo.txt`,`free -m > /dev/null`
      - `{output 1}>>{target file path}` here its a double > so its gonna append everything that is already present in that file with the new output example : `date>>/tmp/sysinfo.txt`
      - `{the command} &>> /tmp//error.log` here i am telling please redirect the errors or anything that comes to the temp error file
-      ## Piping
-       - `ls | wc -l`  here piping is just like mongodb pipeline here the first output acts like the input for the next command here the ls will tell you all the files and directories and wc -l gonna count all of them 
+    ## Piping
+    - `ls | wc -l`  here piping is just like mongodb pipeline here the first output acts like the input for the next command here the ls will tell you all the files and directories and wc -l gonna count all of them 
             1. `ls | grep host` count all ls all the files and directories and show me all the files that starts with the name host 
-            2. ``
+15. # users and groups
+  - users and groups are used to control access to files and resources 
+  - users login to the system by supplying their username and pasword
+  - every user of teh system is assigned a unique user ID number (the UID)
+  - Users name and UID are stored in etc/passwd
+  `uid=1000(vagrant) gid=1000(vagrant) groups=1000(vagrant)`
+  - uid is the user Id gid is the group id 
+  - so vagrant user belongs to the group called vagrant and a group called wheel
+  - `useraadd {name}` this command is used to create an user 
+  - `tail -4 /etc/passwd` gives us the information about the users
+   - `tail -4 /etc/group` gives you the groups that are cerated 
+   - `groupadd {group name}` its a way by which you can create a group
+16. # File permissions
+   -  Viewing permissions from the command line
+   - File permissions may be viewed using ls -l
+   - Four symbols are used when displaying permissions:
+     - `r` : permission to read a file or list a directory contents
+     - `w` : permission to write to a file or create and remove files from a directory
+     - `x` : permissionto execute a program or change into a directory
+     - `- ` : no permission 
+     - `ls -l` its gonna give you 
+     -rw-------. 1 root root 2027 Mar  5 15:56 anaconda-ks.cfg
+     -rw-------. 1 root root 1388 Mar  5 15:56 original-ks.cfg
+     now here for the anaconda-ks.cfg it owned by the rooot use and the group is root 
+     - => filetype
+     rw- => User(permissions)
+     --- =>group(for group there is no permissions)
+     --- => others(for others there is no permissions)
+  
