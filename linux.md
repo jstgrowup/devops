@@ -114,4 +114,8 @@ difference is the packaging system in these both
      rw- => User(permissions)
      --- =>group(for group there is no permissions)
      --- => others(for others there is no permissions)
-  
+17. # Sudo
+    - sudo gives power to a normal user to execute commands which is owned by root user
+    - `sudo yum install git -y` here the normal user is getting the root user powers and therefore if you remove the sudo word this is what you will see `Error: This command has to be run with superuser privileges (under the root user on most systems).`
+    - `sudo useradd test` its gonna create a test user if you dont use sudo `useradd: Permission denied. useradd: cannot lock /etc/passwd; try again later.` this is what you will see
+    - `useradd test` its gonna create an user now you set pasword for the user using `passwd test` now switch to that user using `su test` 
