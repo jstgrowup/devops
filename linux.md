@@ -119,3 +119,10 @@ difference is the packaging system in these both
     - `sudo yum install git -y` here the normal user is getting the root user powers and therefore if you remove the sudo word this is what you will see `Error: This command has to be run with superuser privileges (under the root user on most systems).`
     - `sudo useradd test` its gonna create a test user if you dont use sudo `useradd: Permission denied. useradd: cannot lock /etc/passwd; try again later.` this is what you will see
     - `useradd test` its gonna create an user now you set pasword for the user using `passwd test` now switch to that user using `su test` 
+18. # Software management
+    - `tree /var/log` from root user it will show you the tree structure of the directory
+    - `curl url -o {file name}` curl is useed to download something say for example curl https://sadas -o rpmfinder
+    - `rpm -ivh rpmfinder` this one is for installing where i stands for install , v stands for verbose (for printing) , h is for human readable
+    - `yum install httpd` here the thing is most of teh times the packages have interanal dependencies so its better to use yum as its gonna install teh target package as well as its dependencies
+    - `yum remove httpd` if you want to remove the package simply use httpd
+    - 
