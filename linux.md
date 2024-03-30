@@ -43,7 +43,7 @@ hardware=> linux kernal => shell => commands(cd,ls,mkdir)
 - RPM based : RHEL,Centos, Oracle Linux , amazon linux
 - Debian based : ubuntu server, Kali Linux 
 difference is the packaging system in these both 
-# Commands
+## Commands
 ![commands](https://github.com/jstgrowup/My_System_design/files/14549348/LinuxQuickstartV5.pdf)
 1. `touch` to create a a file
 2. `mkdir` to create a folder
@@ -65,10 +65,10 @@ difference is the packaging system in these both
      - `gg` will take you to the first line of the 
      - `y` for copying a line and for pasting use `p`
      - `dd` for deleting a line as well as cut a line
-12. # Types of files in Linux
+12. ## Types of files in Linux
     `file {file name}` it will return you the type of the file 
     
-13. # Filter and IO redirection
+13. ## Filter and IO redirection
      - `grep {target term} {file name}` lets say you wnat to search a word in a file than you can use this command
      - linux is case sensitive so if you fin for a word example firewall itsd gonna give you the exact results for this you can use `grep -i {target word} {file name}`
      - `grep -i {target word} *` lets say i want to find a word in all the files in the current directory
@@ -78,7 +78,7 @@ difference is the packaging system in these both
      - `head {file name}` to see first 10 lines of teh file 
      - `head -{number of lines} {file name}` to the first number of lines that are defined in teh number of lines
      - `tail -f {file name}` this gonna show you the last 10 lines and if there is any change in teh file its gonna show you , its helps in troubleshooting as well
- 14. # input/output redirection (>>)
+ 14. ## input/output redirection (>>)
  redirection is a process where we can copy the output of any  commands,files into a new file
      - `{output 1}>{target file path}` here its a single > so its gonna replace everythign that is already present in that file with the new output example : `date>/tmp/sysinfo.txt`,`free -m > /dev/null`
      - `{output 1}>>{target file path}` here its a double > so its gonna append everything that is already present in that file with the new output example : `date>>/tmp/sysinfo.txt`
@@ -86,7 +86,7 @@ difference is the packaging system in these both
     ## Piping
     - `ls | wc -l`  here piping is just like mongodb pipeline here the first output acts like the input for the next command here the ls will tell you all the files and directories and wc -l gonna count all of them 
             1. `ls | grep host` count all ls all the files and directories and show me all the files that starts with the name host 
-15. # users and groups
+15. ## users and groups
   - users and groups are used to control access to files and resources 
   - users login to the system by supplying their username and pasword
   - every user of teh system is assigned a unique user ID number (the UID)
@@ -98,7 +98,7 @@ difference is the packaging system in these both
   - `tail -4 /etc/passwd` gives us the information about the users
    - `tail -4 /etc/group` gives you the groups that are cerated 
    - `groupadd {group name}` its a way by which you can create a group
-16. # File permissions
+16. ## File permissions
    -  Viewing permissions from the command line
    - File permissions may be viewed using ls -l
    - Four symbols are used when displaying permissions:
@@ -114,15 +114,36 @@ difference is the packaging system in these both
      rw- => User(permissions)
      --- =>group(for group there is no permissions)
      --- => others(for others there is no permissions)
-17. # Sudo
+17. ## Sudo
     - sudo gives power to a normal user to execute commands which is owned by root user
     - `sudo yum install git -y` here the normal user is getting the root user powers and therefore if you remove the sudo word this is what you will see `Error: This command has to be run with superuser privileges (under the root user on most systems).`
     - `sudo useradd test` its gonna create a test user if you dont use sudo `useradd: Permission denied. useradd: cannot lock /etc/passwd; try again later.` this is what you will see
     - `useradd test` its gonna create an user now you set pasword for the user using `passwd test` now switch to that user using `su test` 
-18. # Software management
+18. ## Software management
     - `tree /var/log` from root user it will show you the tree structure of the directory
     - `curl url -o {file name}` curl is useed to download something say for example curl https://sadas -o rpmfinder
     - `rpm -ivh rpmfinder` this one is for installing where i stands for install , v stands for verbose (for printing) , h is for human readable
     - `yum install httpd` here the thing is most of teh times the packages have interanal dependencies so its better to use yum as its gonna install teh target package as well as its dependencies
     - `yum remove httpd` if you want to remove the package simply use httpd
-    - 
+19. ## services
+    - after yum install httpd we have to execute `systemctl status httpd` by this we will install a service names httpd
+    - by default the service will be stopped  `systemctl start httpd` by this command you can start the service 
+    - now if you check the status again you will see that teh service is running again 
+    - if change some configuration in the service you can alwways restart the service by running `systemctl restart httpd` / `systemctl reload httpd` 
+    -  if you reboot the root user the sercice will also run down 
+    - `systemctl is-active httpd` by this command you can check the status of the service whether its running or not  or its active or not 
+    - systemctl works based on its configuration file and it got created when we installed the httpd through yum
+    - `cat `
+20. ## processes
+    - its like the task manager we have in windows
+    - it shows all the dynamic processes 
+    - here processes are called tasks
+    - PID is the process ID
+    - `top` this is the command to open the processes
+    - `ps aux` this is the command for the same but it just takes a snapshot and shows you and it just exits but its own 
+    - you can stop a process so note the PID and do `kill PID` so it will first close all teh child processes and than it will close all the parent processes
+    - if sometimes the kill command is not able to close the service than we can do you can do `kill -9 {PID}` but all the child processes will be orphans and it will only kill the parent process of the PID that was mentioned these orphan process do consume memory 
+    - `ps -ef` this command shows you the process with there parent PID
+    - zombie processes are those which have teh entry in the processes but are not running 
+21. ## archiviving
+    -  `tar -czvf`  here c is for create , z is to compress , v is for verbose and f is for file 
