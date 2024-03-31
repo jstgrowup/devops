@@ -110,4 +110,9 @@ https://github.com/devopshydclub/vprofile-project/blob/main/vagrant/Manual_provi
 
 # Tomcat
 
-1.
+1. `yum update -y` to update the OS
+2. `yum install epel-release -y` enable the epel repository (yum: yum is a command-line package manager used in some Linux distributions, particularly in CentOS, RHEL, and other RPM-based distributions. It helps you install, update, and manage software packages on your system.
+
+install: This is an action that tells yum to install a package.
+
+epel-release: This is the name of the package that yum will install. In this case, it's the "Extra Packages for Enterprise Linux (EPEL)" repository configuration package. EPEL provides additional software packages not included in the standard CentOS/RHEL repositories.) 3. `dnf -y install java-11-openjdk java-11-openjdk-devel` to install open jdk 11 for java 11 jdk and jre are different jre is java runtime enviroment and jdk is java development kit 4. `dnf install git maven wget -y` maven idk man 5. `wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz` download the apache server
