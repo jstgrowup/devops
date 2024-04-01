@@ -115,4 +115,76 @@ https://github.com/devopshydclub/vprofile-project/blob/main/vagrant/Manual_provi
 
 install: This is an action that tells yum to install a package.
 
-epel-release: This is the name of the package that yum will install. In this case, it's the "Extra Packages for Enterprise Linux (EPEL)" repository configuration package. EPEL provides additional software packages not included in the standard CentOS/RHEL repositories.) 3. `dnf -y install java-11-openjdk java-11-openjdk-devel` to install open jdk 11 for java 11 jdk and jre are different jre is java runtime enviroment and jdk is java development kit 4. `dnf install git maven wget -y` maven idk man 5. `wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz` download the apache server
+epel-release: This is the name of the package that yum will install. In this case, it's the "Extra Packages for Enterprise Linux (EPEL)" repository configuration package. EPEL provides additional software packages not included in the standard CentOS/RHEL repositories.)
+
+3. `dnf -y install java-11-openjdk java-11-openjdk-devel` to install open jdk 11 for java 11 jdk and jre are different jre is java runtime enviroment and jdk is java development kit 4. `dnf install git maven wget -y` maven idk man
+
+4. `wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz` download the apache server
+
+5. `tar xzvf apache-tomcat-9.0.75.tar.gz` from the above command its gonna downlaod a zip folder called apache-tomcat and now you can extract the the folder using this command - tar is a command-line utility used in Unix-like operating systems to package files and directories into an archive file (also known as a "tarball") and to extract files from an archive -
+
+- x: This option tells tar to extract files from the archive.
+- z: This option tells tar to use gzip compression/decompression when working with the archive. It indicates that the archive file is compressed using gzip.
+- v: This option stands for "verbose." It tells tar to print the names of the files it's extracting as it goes.
+- f: This option is used to specify the filename of the archive to work with. The filename immediately follows this option.
+  APACHE is the org name and tomcat is the name of the service and server
+
+6. `useradd --home-dir /usr/local/tomcat --shell /sbin/nologin tomcat` add a tomcat user
+7. `cp -r apache-tomcat-9.0.75/* /usr/local/tomcat` to move everything from apache-tomcat-9.0.75 to the usr folder
+8. `chow -R tomcat.tomcat /usr/local/tomcat`
+9. `vi /etc/systemd/system/tomcat.service` to open a file
+10. `[Unit]
+Description=Tomcat
+After=network.target
+[Service]
+User=tomcat
+WorkingDirectory=/usr/local/tomcat
+Environment=JRE_HOME=/usr/lib/jvm/jre
+Environment=JAVA_HOME=/usr/lib/jvm/jre
+Environment=CATALINA_HOME=/usr/local/tomcat
+Environment=CATALINE_BASE=/usr/local/tomcat
+ExecStart=/usr/local/tomcat/bin/catalina.sh run
+ExecStop=/usr/local/tomcat/bin/shutdown.sh
+SyslogIdentifier=tomcat-%i
+[Install]
+WantedBy=multi-user.target` paste this and press esc and do :wq to save and exit
+11. `systemctl daemon-reload` so this to reload the tomcat server
+    - When you make changes to systemd configuration files, such as unit files (.service, .socket, .target, etc.), you need to inform systemd to reload these changes. This is where systemctl daemon-reload comes into play
+12. `systemctl start tomcat` to start the service
+13. `systemctl enable tomcat` to enble the service
+14. ` git clone -b main https://github.com/hkhcoder/vprofile-project` clone the project
+15. `cd vprofile-project/`
+16. ` vim src/main/resources/application.properties` see the file there are configurations
+17. `mvn install` its gonna downllad the artifact its like the deployable application.
+18. `ls target` here you will find the folder called vprofile v2.war and this is the artifact its like a zip form of vprofile-v2.
+19. `systemctl stop tomcat` stop the server.
+20. `ls /usr/local/tomcat/webapps` here you will get the folder called ROOT.
+21. `rm -rf /usr/local/tomcat/webapps/ROOT` its gonna remove the ROOT folder.
+22. `cp target/vprofile-v2.war  /usr/local/tomcat/webapps/ROOT.war` copy the war folder and make a root folder.
+23. `ls /usr/local/tomcat/webapps/` you will see the ROOT folder and now you have successfully deleted the default root folder and instal;led the artifact as the default root folder.
+24. `systemctl start tomcat` start the tomcat server and now if you do the ls on `/usr/local/tomcat/webapps/` you will observe that there is a ROOT folder so what happens is the service has extracted the ROOT.war and it has created a ROOT folder now that becomes our default application.
+25. `systemctl status tomcat` to check the status of the service if its running or not.
+
+# NGINX setup
+
+1. `apt update` to find the latest packages
+2. `apt upgrade` to upgrade the latest packages
+3. `apt install ngnix -y` to install the ngnix
+4. ` vi /etc/ngnix/sites-available/vproapp` make a file and put my custom configuration
+5. `upstream vproapp {
+server app01:8080;
+}
+server {
+listen 80;
+location / {
+proxy_pass http://vproapp;
+}
+}` this is the configuration
+6. `ls /etc/nginx/sites-available/` this is where will be having our configuration
+7. `ls /etc/ngnix/sites-enabled` here will be having a link
+8. `ls -l /etc/nginx/sites-enabled/` you will see `lrwxrwxrwx 1 root root 34 Apr  1 18:18 default -> /etc/nginx/sites-available/default` this is a link now from enabled we have to create a link to our nginx server
+9. `rm -rf /etc/nginx/sites-enabled/default` this will remove the link
+10. `ln -s /etc/nginx/sites-available/vproapp /etc/nginx/sites-enabled/vproapp` ln -s will create a link to our nginx server
+11. now if you do `ls -l /etc/nginx/sites-enabled/` you will see `lrwxrwxrwx 1 root root 34 Apr  1 18:35 vproapp -> /etc/nginx/sites-available/vproapp`
+12. `systemctl restart nginx` restart the service
+13. `systemctl status nginx`
