@@ -188,3 +188,22 @@ proxy_pass http://vproapp;
 11. now if you do `ls -l /etc/nginx/sites-enabled/` you will see `lrwxrwxrwx 1 root root 34 Apr  1 18:35 vproapp -> /etc/nginx/sites-available/vproapp`
 12. `systemctl restart nginx` restart the service
 13. `systemctl status nginx`
+
+# Flow Of Execution
+
+1. Setup tools mentioned in prerequisite video
+2. clone source code
+3. cd into the vagrant dir
+4. validate
+5. setup all the services
+   - Mysql
+   - Memcached
+   - Rabbit MQ
+   - tomcat
+6. login to web01
+7. `ip addr show` to get the IP address
+8. `vagrant destroy --force` to destroy all the VMs
+
+# Setup for automatically
+
+1.
