@@ -206,4 +206,5 @@ proxy_pass http://vproapp;
 
 # Setup for automatically
 
-1.
+1. `cd Automated_provisioning_WinMacIntel/`
+2. `vagrant up` and it will execute all the commands and it will
