@@ -60,4 +60,38 @@
 - 32 bit binary number
 - public IP (Internet IP)
 - Private IP (lets )
+
+# Protocols
+
+- these are the set of rules
+- its a formal specification that defines the procedures , format, timing , sequece the protol of communication
+- transport layer Protocols
+- TCP and UDP
+
+### TCP
+
+- Reliable Protocol
+- COnnection Oriented
+- Performs three ways handshake
+- Provision for error detection and retyransmission
+- Most applications use TCP for reliable and guaranteed transmission
+- FTP,HTTP,HTTPS
+
+### UDP
+
+- Unreliable Protocol
+- Connectionless
+- Much faster than TCP
+- No acknowledgement waits
+- No proper sequencing of data units
+- Suitable for applications where the speed matters more than reliability
+- DNS,DHCP,TFTP,ARP
+
+# Protocols and there port number
+
+- just like computers have the IP Address the computers have the port number and each request will be listening to this port
+- example DNS has port number of UDP 53
+- DNS TCP has a port number TCP 53
+- HTTP has TCP 80
+- HTTPS has TCP 443
 -
