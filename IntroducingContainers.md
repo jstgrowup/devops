@@ -41,4 +41,22 @@
 - `curl http://172.17.0.2:80` here the 172 part is the IP address and the 80 is the port for the container you will see html in this command
 - `ip addr show` it will give you the IP for the VM example 192.168.29.249 this is the bridge IP
 - `docker ps` to check the host port lets say 9080 now if you put the host IP:the port its gonna route the request to the container and it will return you the html
+- `docker build -t testimg` this will be the image name and the location of the image
+- `docker ps` to check all the containers take the port f the new container and put it in the browser along with the host machine IP
+- `docker stop web01 relaxed_germain` to stop the containers give the containers names
+- `docker rmi {all the image Ids}` fing all the images using docker images
+
+# Vprofile project on containers
+
+- Docker Compose is a tool for defining and running multi-container applications. It is the key to unlocking a streamlined and efficient development and deployment experience.
+- `vagrant global -status --prune` to check the status of all the global virtual machines
+- `vim docker-compose.yml` for creating a file for docker compose and the file name should be docker-compose.yml
+- https://raw.githubusercontent.com/devopshydclub/vprofile-project/docker/compose/docker-compose.yml put this file content in the docker-compose file
+- `docker compose up -d` its gonna download all the images run it where the compose file is there
+- now check the ip using `ip addr show` and access the IP in the browser and it will open a website that is hosted in the container
+- `docker compose down` it will stop all the containers and it will remove them
+- `docker system prune -a` this command will remove all the stopped containers and the images that are not used
+
+# Microservices
+
 -
